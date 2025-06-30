@@ -23,6 +23,36 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build name-sorter.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test name-sorter-tests/name-sorter-tests.csproj --configuration Release --no-build --verbosity normal --logger trx --results-directory TestResults
+    - name: Publish test results
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: .NET Tests
+        path: TestResults/*.trx
+        reporter: dotnet-trx
+    - name: Publish console app
+      run: dotnet publish name-sorter/name-sorter.csproj --configuration Release --output ./publish --no-build
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: name-sorter-app
+        path: ./publish/
+
+    - name: Create release package
+      if: github.ref == 'refs/heads/main'
+      run: |
+        cd publish
+        tar -czf ../name-sorter-${{ github.sha }}.tar.gz *
+
+    - name: Upload release package
+      if: github.ref == 'refs/heads/main'
+      uses: actions/upload-artifact@v4
+      with:
+        name: name-sorter-release
+        path: name-sorter-${{ github.sha }}.tar.gz
+
+
