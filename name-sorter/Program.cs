@@ -36,7 +36,7 @@ public class Program
 
         try
         {
-            var lines = File.ReadAllLines(opts.FileName).ToNames().Order().Select(n =>
+            var lines = File.ReadAllLines(opts.FileName).ToNames().Order(new NameComparer()).Select(n =>
             {
                 Console.WriteLine(n);
                 return n.ToString();

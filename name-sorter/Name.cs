@@ -1,6 +1,6 @@
 ﻿namespace name_sorter;
 
-public class Name : IComparable<Name>
+public class Name
 {
     private const StringComparison DefaultStringComparison = StringComparison.InvariantCultureIgnoreCase;
     public string Surname { get; }
@@ -25,33 +25,6 @@ public class Name : IComparable<Name>
         Surname = surname;
         GivenNames = givenNames;
 
-    }
-
-    public int CompareTo(Name? other)
-    {
-        if(other == null)
-        {
-            return -1;
-        }
-
-        if (String.Compare(Surname, other.Surname, DefaultStringComparison) != 0)
-        {
-            return String.Compare(Surname, other.Surname, DefaultStringComparison);
-        }
-        
-        
-        var minLength = Math.Min(GivenNames.Length, other.GivenNames.Length);
-        
-        for (int i = 0; i < minLength; i++)
-        {
-            var givenNameComparison = String.Compare(GivenNames[i], other.GivenNames[i], DefaultStringComparison);
-            if (givenNameComparison != 0)
-            {
-                return givenNameComparison;
-            }
-        }
-        
-        return GivenNames.Length.CompareTo(other.GivenNames.Length);
     }
     
     public override string ToString()

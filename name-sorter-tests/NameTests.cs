@@ -54,11 +54,25 @@ public class NameTests
     {
 
         [Test]
-        public void CompareTo_Returns_Negative_When_Other_Is_Null()
+        public void CompareTo_Returns_Negative_When_Y_Is_Null()
         {
             var name = new Name("Smith", new[] { "John" });
 
-            var result = name.CompareTo(null);
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(name, null);
+
+            Assert.That(result, Is.LessThan(0));
+        }
+        
+        [Test]
+        public void CompareTo_Returns_Negative_When_X_Is_Null()
+        {
+            var name = new Name("Smith", new[] { "John" });
+
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(null,name);
 
             Assert.That(result, Is.LessThan(0));
         }
@@ -69,7 +83,9 @@ public class NameTests
             var name1 = new Name("adams", new[] { "John" });
             var name2 = new Name("Brown", new[] { "Jane" });
 
-            var result = name1.CompareTo(name2);
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(name1, name2);
 
             Assert.That(result, Is.LessThan(0)); // adams comes before Brown
         }
@@ -80,7 +96,9 @@ public class NameTests
             var name1 = new Name("smith", new[] { "John" });
             var name2 = new Name("SMITH", new[] { "Jane" });
 
-            var result = name1.CompareTo(name2);
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(name1, name2);
 
             Assert.That(result,
                 Is.Not.EqualTo(0).Or.EqualTo(0)); // Will need to be updated based on complete implementation
@@ -92,7 +110,9 @@ public class NameTests
             var name1 = new Name("Smith", new[] { "John" });
             var name2 = new Name("Smith", new[] { "John" });
 
-            var result = name1.CompareTo(name2);
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(name1, name2);
 
             Assert.That(result, Is.EqualTo(0));
         }
@@ -103,7 +123,9 @@ public class NameTests
             var name1 = new Name("Adams", new[] { "Zoe" });
             var name2 = new Name("Brown", new[] { "Alice" });
 
-            var result = name1.CompareTo(name2);
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(name1, name2);
 
             Assert.That(result, Is.LessThan(0)); // Adams < Brown regardless of given names
         }
@@ -114,7 +136,9 @@ public class NameTests
             var name1 = new Name("Smith", new[] { "Alice" });
             var name2 = new Name("Smith", new[] { "Bob" });
 
-            var result = name1.CompareTo(name2);
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(name1, name2);
 
             Assert.That(result, Is.LessThan(0));
         }
@@ -125,7 +149,9 @@ public class NameTests
             var name1 = new Name("Smith", new[] { "John", "Adam" });
             var name2 = new Name("Smith", new[] { "John", "Brian" });
 
-            var result = name1.CompareTo(name2);
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(name1, name2);
 
             Assert.That(result, Is.LessThan(0)); 
         }
@@ -136,7 +162,9 @@ public class NameTests
             var name1 = new Name("Smith", new[] { "John" });
             var name2 = new Name("Smith", new[] { "John", "Michael" });
 
-            var result = name1.CompareTo(name2);
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(name1, name2);
 
             Assert.That(result, Is.LessThan(0)); 
         }
@@ -147,8 +175,9 @@ public class NameTests
             var name1 = new Name("SMITH", new[] { "JOHN" });
             var name2 = new Name("smith", new[] { "john" });
 
-            var result = name1.CompareTo(name2);
-
+            var comparer = new NameComparer();
+            
+            var result = comparer.Compare(name1, name2);
             Assert.That(result, Is.EqualTo(0));
         }
 
@@ -166,7 +195,7 @@ public class NameTests
                 new Name("Smith", new[] { "John", "Adam" })
             };
 
-            names.Sort();
+            names.Sort(new NameComparer());
 
             Assert.That(names[0].Surname, Is.EqualTo("Adams"));
             Assert.That(names[0].GivenNames[0], Is.EqualTo("Jane"));
