@@ -56,7 +56,7 @@ public class Name : IComparable<Name>
     
     public override string ToString()
     {
-        return $"{Surname} {string.Join(" ", GivenNames)}";
+        return $"{string.Join(" ", GivenNames)} {Surname}";
     }
 
     public override int GetHashCode()

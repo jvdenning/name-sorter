@@ -14,9 +14,9 @@ public class ProgramTests
     {
         var testNames = new[]
         {
-            "Windsor Elizabeth Alexandra Mary Victoria",
-            "Kennedy John Fitzgerald Patrick Joseph",
-            "Roosevelt Franklin Delano Theodore James"
+            "Elizabeth Alexandra Mary Victoria Windsor",
+            "John Fitzgerald Patrick Joseph Kennedy",
+            "Franklin Delano Theodore James Roosevelt"
         };
 
         var tempFileName = Path.GetTempFileName();
@@ -33,7 +33,7 @@ public class ProgramTests
             foreach (var line in fileLines)
             {
                 var parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                Assert.That(parts.Length, Is.EqualTo(5)); // Surname + 4 given names
+                Assert.That(parts.Length, Is.EqualTo(5)); 
             }
         }
         finally
@@ -50,10 +50,10 @@ public class ProgramTests
     {
         var testNames = new[]
         {
-            "Adams John", // 1 given name
-            "Baker Sarah Elizabeth", // 2 given names
-            "Clark Michael James Robert", // 3 given names
-            "Edwards Mary Catherine Louise Anne" // 4 given names
+            "John Adams", // 1 given name
+            "Sarah Elizabeth Barker", // 2 given names
+            "Michael James Robert Clark", // 3 given names
+            "Mary Catherine Louise Anne Edwards" // 4 given names
         };
 
         var tempFileName = Path.GetTempFileName();
@@ -108,9 +108,9 @@ public class ProgramTests
     {
         var testNames = new[]
         {
-            "Williams Robert Michael James",
-            "Smith John",
-            "Johnson Mary Elizabeth"
+            "Robert Michael James Williams",
+            "John Smith",
+            "Mary Elizabeth Johnson"
         };
 
         var tempFileName = Path.GetTempFileName();
@@ -149,15 +149,15 @@ public class ProgramTests
     {
         var testNames1 = new[]
         {
-            "Williams Robert Michael James",
-            "Smith John",
-            "Johnson Mary Elizabeth"
+            "Robert Michael James Williams",
+            "John Smith",
+            "Mary Elizabeth Johnson"
         };
 
         var testNames2 = new[]
         {
-            "Wax Ruby",
-            "Bassett Fred"
+            "Ruby Wax",
+            "Fred Bassett"
         };
 
         var tempFileName = Path.GetTempFileName();

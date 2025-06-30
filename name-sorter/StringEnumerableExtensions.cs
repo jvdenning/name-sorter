@@ -8,7 +8,7 @@ public static class StringEnumerableExtensions
         foreach (var name in names)
         {
             var parts = name.Split(' ');
-            yield return new Name(parts[0], parts.Skip(1).ToArray());
+            yield return new Name(parts[^1], parts[..^1]);
         }
         
     }

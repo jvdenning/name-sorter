@@ -44,10 +44,10 @@ public class NameTests
     }
 
     [Test]
-    public void To_String_Returns_Surname_Then_GivenNames()
+    public void To_String_Returns_GivenNames_Then_Surnames()
     {
         var name = new Name("Smith", new[] { "John","Edward","Henry" });
-        Assert.That(name.ToString(), Is.EqualTo("Smith John Edward Henry"));
+        Assert.That(name.ToString(), Is.EqualTo("John Edward Henry Smith"));
     }
 
     public class ComparerTests
