@@ -16,7 +16,6 @@ public class NameComparer : Comparer<Name>
             return String.Compare(x.Surname, y.Surname, DefaultStringComparison);
         }
         
-        
         var minLength = Math.Min(x.GivenNames.Length, y.GivenNames.Length);
         
         for (int i = 0; i < minLength; i++)

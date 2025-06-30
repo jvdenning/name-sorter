@@ -2,7 +2,6 @@
 
 public class Name
 {
-    private const StringComparison DefaultStringComparison = StringComparison.InvariantCultureIgnoreCase;
     public string Surname { get; }
     public string[] GivenNames { get; }
 
@@ -17,7 +16,7 @@ public class Name
             throw new ArgumentException("At least one given name is required", nameof(givenNames));
         }
         
-        if (givenNames.Any(name => string.IsNullOrWhiteSpace(name)))
+        if (givenNames.Any(string.IsNullOrWhiteSpace))
         {
             throw new ArgumentException("Given names cannot be null or empty", nameof(givenNames));
         }
