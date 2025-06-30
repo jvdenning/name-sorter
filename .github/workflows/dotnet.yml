@@ -25,14 +25,7 @@ jobs:
     - name: Build
       run: dotnet build name-sorter.sln --configuration Release --no-restore
     - name: Test
-      run: dotnet test name-sorter-tests/name-sorter-tests.csproj --configuration Release --no-build --verbosity normal --logger trx --results-directory TestResults
-    - name: Publish test results
-      uses: dorny/test-reporter@v1
-      if: success() || failure()
-      with:
-        name: .NET Tests
-        path: TestResults/*.trx
-        reporter: dotnet-trx
+      run: dotnet test name-sorter-tests/name-sorter-tests.csproj --configuration Release --no-build --verbosity normal   
     - name: Publish console app
       run: dotnet publish name-sorter/name-sorter.csproj --configuration Release --output ./publish --no-build
 
