@@ -121,18 +121,13 @@ public class ProgramTests
 
             Program.Main([tempFileName]);
 
-            var names = File.ReadLines(SortedNameFile).ToNames().ToArray();
+            var names = File.ReadLines(SortedNameFile).ToArray();
 
-            Assert.That(names.Length, Is.EqualTo(3));
+            Assert.That(names.Length, Is.EqualTo(testNames.Length));
 
-            Assert.That(names[0].Surname, Is.EqualTo("Johnson"));
-            Assert.That(names[0].GivenNames, Is.EqualTo(new[] { "Mary", "Elizabeth" }));
-
-            Assert.That(names[1].Surname, Is.EqualTo("Smith"));
-            Assert.That(names[1].GivenNames, Is.EqualTo(new[] { "John" }));
-
-            Assert.That(names[2].Surname, Is.EqualTo("Williams"));
-            Assert.That(names[2].GivenNames, Is.EqualTo(new[] { "Robert", "Michael", "James" }));
+            Assert.That(names[0], Is.EqualTo(testNames[2]));
+            Assert.That(names[1], Is.EqualTo(testNames[1]));
+            Assert.That(names[2], Is.EqualTo(testNames[0]));
         }
         finally
         {
@@ -170,15 +165,12 @@ public class ProgramTests
             File.WriteAllLines(tempFileName, testNames2);
             Program.Main([tempFileName]);
 
-            var names = File.ReadLines(SortedNameFile).ToNames().ToArray();
+            var names = File.ReadLines(SortedNameFile).ToArray();
 
             Assert.That(names.Length, Is.EqualTo(2));
-
-            Assert.That(names[0].Surname, Is.EqualTo("Bassett"));
-            Assert.That(names[0].GivenNames, Is.EqualTo(new[] { "Fred" }));
-
-            Assert.That(names[1].Surname, Is.EqualTo("Wax"));
-            Assert.That(names[1].GivenNames, Is.EqualTo(new[] { "Ruby" }));
+            Assert.That(names[0], Is.EqualTo(testNames2[1]));
+            Assert.That(names[1], Is.EqualTo(testNames2[0]));
+         
         }
         finally
         {
